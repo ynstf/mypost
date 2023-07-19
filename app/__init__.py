@@ -22,7 +22,7 @@ def not_found(error):
 
 #database
 from app.models import db,users
-#app.app_context().push()
+app.app_context().push()
 db.create_all()
 db.session.commit()
 
