@@ -1,0 +1,91 @@
+body{
+    height: 100%;
+    background: linear-gradient(rgba(2,0,36,1), rgba(0,212,255,1));
+    background-repeat: no-repeat;
+    align-items: center;
+    margin: auto;
+    
+}
+h1{
+    color: rgb(233, 163, 102);
+    text-align: center;
+    padding: 50px;
+}
+.error{
+    align-items: center;
+    text-align: center;
+    margin: 0px 20px;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.container{
+    background: rgba(120, 120, 121, 0.3) ;
+    border-radius: 30px;
+    height: 100%;
+    width: 500px;
+    margin: auto;
+    align-items: center;
+}
+.container .card {
+    align-items: center;
+    text-align: center;
+
+}
+
+.container .card .inputs input{
+    border-radius: 30px;
+    width: 80%;
+    height: 30px;
+    text-align: center;
+    margin: 20px;
+
+}
+#Content{
+    height: 80px;
+
+}
+#save{
+    width: 30%;
+    font-weight: 600;
+    border-radius: 30px;
+    font-size: large;
+    color: bisque;
+    background-color: #4017c6;
+    transition: 0.3s;
+}
+#save:hover{
+    
+    background-color: #bfaaf0;
+    color: #020202;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    margin: 0px 0px;
+    width: 100%;
+}
+h2{
+    margin: 0px 10px;
+    color: rgb(87, 109, 113) ;
+}
+
+.logout{
+
+    background-color: aliceblue;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    right: 10px;
+    margin: 10px 20px;
+    border-radius: 20px;
+    color: #4017c6;
+    transition: 0.3s;
+}
+
+.logout:hover{
+    
+    background-color: rgba(2,0,36,1);
+    color: #dbd4d4;
+}

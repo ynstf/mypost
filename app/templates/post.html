@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+    <link rel="shortcut icon" type="x-icon" href="{{url_for('static', filename='logo.png')}}">
+    <title>{{ titre }}</title>
+</head>
+<body>
+
+    <div class="header">
+        <h2>Hi admin</h2>
+        <a href="{{ url_for('home.logout')}}"><button class="logout" type = "button" > Logout </button></a>
+    </div>
+
+    <div class="error">
+        {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div style="color: rgb(219, 44, 44);" class="alert alert-danger">
+                        {{ messages[0] }}
+                    </div>
+                {% endif %}
+            {% endwith %}
+    </div>
+    
+    <div class="container">
+        <div class="card">
+            <h1>FORM</h1>
+
+            <form class="inputs" method="post">
+                {{ form.csrf_token }}
+
+                <div> {{ form.title(placeholder='titre') }}</div>
+                <div> {{ form.desc(placeholder='Short description') }}</div>
+                <div> {{ form.content(placeholder='Content', cols="55", rows="20",style="border-radius: 30px;text-align: center;") }}</div>
+                <div> {{ form.url(placeholder='Photo URL') }}</div>
+                <div> {{ form.category(placeholder='Category') }}</div>
+                <div> {{ form.tags(placeholder='Tags') }}</div>
+                <div> {{ form.submit(id="save",value="SAVE") }}</div>
+                <a href = "{{ url_for('home.download')}}">
+                    <button  id="save" type = "button" > Export </button>
+                </a>
+                <div><br></div>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='login.css')}}">
+    <link rel="stylesheet" href="../static/login.css">
+    <link rel="shortcut icon" type="x-icon" href="{{url_for('static', filename='logo.png')}}">
+    <title>login</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+
+        
+
+        <form class="card" action="" method="post">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div style="color: rgb(219, 44, 44);" class="alert alert-danger">
+                        {{ messages[0] }}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            {{ form.csrf_token }}
+
+            <div> {{ form.password(placeholder='PASSWORD') }}</div>
+            <div> {{ form.enter(id="login",value="Enter") }}</div>
+        </form>
+    </div>
+</body>
+</html>

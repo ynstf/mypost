@@ -1,0 +1,48 @@
+body{
+    height: 100vh;
+    background: linear-gradient(rgba(2,0,36,1), rgba(0,212,255,1));
+    background-repeat: no-repeat;
+    align-items: center;
+    margin: auto;
+    
+}
+h1{
+    color: rgb(233, 163, 102);
+    text-align: center;
+    padding: 50px;
+}
+.container{
+    background: rgba(120, 120, 121, 0.3) ;
+    border-radius: 30px;
+    height: 60%;
+    width: 500px;
+    margin: auto;
+    align-items: center;
+}
+.container .card {
+    align-items: center;
+    text-align: center;
+
+}
+.container .card input{
+    border-radius: 30px;
+    width: 80%;
+    height: 30px;
+    text-align: center;
+    margin: 20px;
+
+}
+
+#login{
+    width: 30%;
+    font-weight: 600;
+    font-size: large;
+    color: bisque;
+    background-color: #4017c6;
+    transition: 0.3s;
+}
+#login:hover{
+    
+    background-color: #bfaaf0;
+    color: #020202;
+}
