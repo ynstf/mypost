@@ -95,13 +95,13 @@ def page():
     #print(head)
     #print(line)
 
-    if os.path.exists(url_for('static', filename='post.csv')) is False:
-            with open(url_for('static', filename='post.csv'),"w",encoding="utf-8") as file:
+    if os.path.exists("post.csv") is False:
+            with open("post.csv","w",encoding="utf-8") as file:
                 file.writelines(head)
                 file.writelines(line)
                 
     else :
-        with open(url_for('static', filename='post.csv'),"a",encoding="utf-8") as file:
+        with open("post.csv","a",encoding="utf-8") as file:
             file.writelines("\n")
             file.writelines(line)
     file.close()
@@ -118,22 +118,7 @@ def logout():
     logout_user()
     return redirect(url_for('home.login'))
 
-@home.route("/download")
-@login_required
-def download():
-    time = "post " +  str(datetime.datetime.now())
 
-    try:
-        with open(url_for('static', filename='post.csv'),"r",encoding="utf-8") as fileToRead:
-            data = fileToRead.readlines()
-
-        os.remove("app/static/post.csv")
-
-        with open(url_for('static', filename='temp.csv'),"w",encoding="utf-8") as fileToWrite:
-            fileToWrite.writelines(data)
-
-        return send_file(url_for('static', filename='temp.csv'),as_attachment=True,download_name=f"{time}.csv")
-    
-    except:
+""" except:
         flash('no data was found! Or you already download it, enter your posts then you can export them.')
-        return redirect(url_for('home.page'))
+        return redirect(url_for('home.page'))"""
