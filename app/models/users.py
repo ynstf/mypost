@@ -8,9 +8,10 @@ class User(db.Model, UserMixin):
 
 
 from werkzeug.security import generate_password_hash
-db.create_all()
-db.session.commit()
+
 try:
+    db.create_all()
+    db.session.commit()
     if User.query.filter_by().first().name == "admin":
         pass
     else:
