@@ -1,5 +1,5 @@
 from app import app
-from flask import send_file
+from flask import send_file,flash,redirect,url_for
 import os
 from flask_login import login_required
 import datetime
@@ -9,17 +9,20 @@ import datetime
 def download():
     time = "post " +  str(datetime.datetime.now())
 
+    try : 
+        with open("post.csv","r",encoding="utf-8") as fileToRead:
+            data = fileToRead.readlines()
 
-    with open("post.csv","r",encoding="utf-8") as fileToRead:
-        data = fileToRead.readlines()
+        os.remove("post.csv")
 
-    os.remove("post.csv")
+        with open(r"app\temp.csv","w",encoding="utf-8") as fileToWrite:
+            fileToWrite.writelines(data)
 
-    with open(r"app\temp.csv","w",encoding="utf-8") as fileToWrite:
-        fileToWrite.writelines(data)
-
-    
-    return send_file("temp.csv",as_attachment=True,download_name=f"{time}.csv")
+        
+        return send_file("temp.csv",as_attachment=True,download_name=f"{time}.csv")
+    except:
+        flash('no data was found! Or you already download it, enter your posts then you can export them.')
+        return redirect(url_for('home.page'))
 
 
 if __name__ == '__main__':
