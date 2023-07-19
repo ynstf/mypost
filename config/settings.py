@@ -5,8 +5,7 @@ class Config:
     DEBUG = False
     PORT = os.environ.get('PORT') or 5000
     ENV = os.environ.get('FLASK_ENV')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    #SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
     SECRET_KEY = "AZERTY@1234556789"
 
 class development(Config):

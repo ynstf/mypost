@@ -11,14 +11,53 @@ home = Blueprint('home', __name__)
 @home.route('/', methods=['GET', 'POST'])
 def login():
 
+    import mysql.connector
+
+    mydb = mysql.connector.connect(
+    host="l0ebsc9jituxzmts.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    user="v370ehz4b72715yd",
+    password="hpbbvb636ep7xy1w",
+    port=3306,
+    database="by45d2ds3ygl0weq"
+    )
+    mycursor = mydb.cursor()
+
+    """mycursor.execute("DROP TABLE user")
+    mydb.commit()"""
+
+    sql = """CREATE TABLE IF NOT EXISTS user(
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            password VARCHAR(255) NOT NULL)"""
+    mycursor.execute(sql)
+
+    sql = "SELECT * FROM user"
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+
+    if myresult:
+        pass
+    else :
+        
+        sql = "INSERT INTO user (name, password) VALUES (%s, %s)"
+        val = ("admin",generate_password_hash("admin",method="sha256"))
+        mycursor.execute(sql, val)
+        mydb.commit()
+
+    sql = "SELECT * FROM user"
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+    password_db = myresult[0][2]
+
     if request.method == "GET":
         title = "Login"
         form = LoginForm()
         return render_template("login.html",title = title, form=form)
-    user = User.query.filter_by().first()
+    
+    user = User(id=1,name="admin",password="sha256$1VQqOKi0ArgoAnkT$311b4c3a28e9cf8d99550ba081b79ac761c286084d77531b7445d9bc343388c3")
 
     password = request.form.get('password')
-    if check_password_hash(user.password, password):
+    if check_password_hash(password_db, password):
         #if user is true
         login_user(user)
         session['password'] = current_user.password

@@ -11,6 +11,7 @@ APP_ROOT = os.path.join(os.path.dirname(__file__), "..")
 dotenv_path = os.path.join(APP_ROOT, ".env")
 load_dotenv(dotenv_path)
 app.config.from_object('config.settings.' + os.environ.get('ENV'))
+#app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql://v370ehz4b72715yd:hpbbvb636ep7xy1w@l0ebsc9jituxzmts.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/by45d2ds3ygl0weq'
 
 
 #error page
@@ -22,13 +23,13 @@ def not_found(error):
 
 #database
 from app.models import db,users
-app.app_context().push()
+"""#app.app_context().push()
 db.create_all()
-db.session.commit()
+db.session.commit()"""
 
 
-user = users.User.query.filter_by().first()
-print(user)
+"""user = users.User.query.filter_by().first()
+print(user)"""
 #login
 from app.models.users import User
 
