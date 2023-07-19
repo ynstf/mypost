@@ -71,8 +71,8 @@ def login():
         flash('Please check your login details password.')
         return redirect(url_for('home.login'))
     
-
-@home.route(f'/{secrets.token_hex(nbytes=60)}', methods=['GET', 'POST'])
+#secrets.token_hex(nbytes=60)
+@home.route(f'/welcome', methods=['GET', 'POST'])
 @login_required
 def page():
     form = PostForm()
