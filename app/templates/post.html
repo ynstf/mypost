@@ -16,12 +16,16 @@
 
     <div class="error">
         {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <div style="color: rgb(219, 44, 44);" class="alert alert-danger">
-                        {{ messages[0] }}
-                    </div>
-                {% endif %}
-            {% endwith %}
+            {% if messages[0]=="no data was found! Or you already download it, enter your posts then you can export them." %}
+                <div style="color: rgb(219, 44, 44);" class="alert alert-danger">
+                    {{ messages[0] }}
+                </div>
+            {% else %}
+                <div style="color: rgb(66, 162, 10);" class="alert alert-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
     </div>
     
     <div class="container">
@@ -38,9 +42,11 @@
                 <div> {{ form.category(placeholder='Category') }}</div>
                 <div> {{ form.tags(placeholder='Tags') }}</div>
                 <div> {{ form.submit(id="save",value="SAVE") }}</div>
-                <a href = "{{ url_for('download')}}">
-                    <button  id="save" type = "button" > Export </button>
+
+                <a href = "{{ url_for('download') }}" >
+                    <button id="save" type = "button" > Export ({{len_data}}) </button>
                 </a>
+
                 <div><br></div>
             </form>
         </div>

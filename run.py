@@ -18,8 +18,8 @@ def download():
         with open("temp.csv","w",encoding="utf-8") as fileToWrite:
             fileToWrite.writelines(data)
 
-        print(os.getcwd())
         return send_file(os.getcwd()+"//temp.csv",as_attachment=True,download_name=f"{time}.csv")
+    
     except:
         flash('no data was found! Or you already download it, enter your posts then you can export them.')
         return redirect(url_for('home.page'))

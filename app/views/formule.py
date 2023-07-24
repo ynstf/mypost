@@ -72,42 +72,62 @@ def login():
         return redirect(url_for('home.login'))
     
 #secrets.token_hex(nbytes=60)
-@home.route(f'/welcome', methods=['GET', 'POST'])
+@home.route('/welcome', methods=['GET', 'POST'])
 @login_required
 def page():
+
+    import csv
+
     form = PostForm()
     page_title = "POST"
     if request.method == "GET":
-        return render_template('post.html', titre=page_title, form=form)
+        try :
+            import pandas as pd
+            data = pd.read_csv("post.csv")
+            len_data=len(data)
+        except:
+            len_data=0
+        return render_template('post.html', titre=page_title, form=form,len_data=len_data)
     
-    title = request.form.get('title').replace(',', ';')
-    slag = request.form.get('title').replace(',', ';').replace(' ', '_')
-    desc = request.form.get('desc').replace(',', ';')
-    content = request.form.get('content').replace('\n', ' ').replace('\r', '').strip(" ").replace(',', ';')
+    title = request.form.get('title').replace(",",";").replace('"',"`").replace("'","`")
+    title = '"'+str(title)+'"'
+
+    slag = request.form.get('title').replace(' ', '_').replace(",",";").replace('"',"`").replace("'","`")
+    slag = '"'+str(slag)+'"'
+
+    desc = request.form.get('desc').replace(",",";").replace('"',"`").replace("'","`")
+    desc = '"'+str(desc)+'"'
+
+    content = request.form.get('content').replace(",",";").replace('"',"`").replace("'","`")
+    content = '"'+str(content)+'"'
+
     url = request.form.get('url')
     url = '"'+str(url)+'"'
-    category = request.form.get('category').replace(',', ';')
-    tags = request.form.get('tags').replace(',', ';')
 
+    category = request.form.get('category').replace('"',"`").replace("'","`")
+    category = '"'+str(category)+'"'
+
+    tags = request.form.get('tags').replace('"',"`").replace("'","`")
+    tags = '"'+str(tags)+'"'
+
+    #create head and line
     head = 'TITLE,SLUG,DESCRIPTION,CONTENT,URL,CATEGORY,TAGS\n'
     line = f"{title},{slag},{desc},{content},{url},{category},{tags}"
-
-    #print(head)
-    #print(line)
-
+    
+    
     if os.path.exists("post.csv") is False:
             with open("post.csv","w",encoding="utf-8") as file:
                 file.writelines(head)
                 file.writelines(line)
                 
+
     else :
         with open("post.csv","a",encoding="utf-8") as file:
             file.writelines("\n")
             file.writelines(line)
     file.close()
+    flash('the post has been saved.')
     return redirect(url_for('home.page'))
-
-    
 
 
 #logout
@@ -117,8 +137,3 @@ def logout():
     session.pop('password', None)
     logout_user()
     return redirect(url_for('home.login'))
-
-
-""" except:
-        flash('no data was found! Or you already download it, enter your posts then you can export them.')
-        return redirect(url_for('home.page'))"""
